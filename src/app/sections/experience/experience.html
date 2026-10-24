@@ -1,0 +1,69 @@
+<section
+  id="experience"
+  aria-labelledby="experience-title"
+  class="mx-auto max-w-6xl px-4 py-14 sm:px-6 md:py-18"
+>
+  <app-section-heading [index]="2" headingId="experience-title" [text]="i18n.t(ui.nav.experience)" />
+
+  <ol class="border-s border-line">
+    @for (role of roles; track $index) {
+      @let current = role.end === null;
+      <li class="reveal relative ps-6 pb-10 last:pb-0 sm:ps-10">
+        <span
+          aria-hidden="true"
+          class="absolute -start-[7px] top-1.5 size-3.5 rounded-full border-2 border-bg"
+          [class]="current ? 'bg-accent ring-4 ring-accent-soft' : 'bg-line'"
+        ></span>
+
+        <div class="grid gap-2 md:grid-cols-[11rem_1fr] md:gap-8">
+          <p class="font-mono text-sm text-muted md:pt-0.5">
+            <time [attr.datetime]="role.start">{{ format(role.start) }}</time>
+            –
+            @if (role.end; as end) {
+              <time [attr.datetime]="end">{{ format(end) }}</time>
+            } @else {
+              {{ i18n.t(ui.present) }}
+            }
+          </p>
+
+          <div>
+            <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
+              <h3 class="text-lg font-semibold sm:text-xl">{{ i18n.t(role.title) }}</h3>
+              @if (current) {
+                <span
+                  class="rounded-full bg-accent-soft px-2.5 py-0.5 font-mono text-xs font-medium text-accent"
+                  >{{ i18n.t(ui.current) }}</span
+                >
+              }
+            </div>
+
+            <p class="mt-1 font-medium text-accent">
+              @if (role.companyUrl; as url) {
+                <app-external-link
+                  [href]="url"
+                  linkClass="inline-flex items-center gap-1 rounded hover:underline underline-offset-4"
+                  >{{ i18n.t(role.company) }}</app-external-link
+                >
+              } @else {
+                {{ i18n.t(role.company) }}
+              }
+              @if (role.note; as note) {
+                <span class="font-normal text-muted"> · {{ i18n.t(note) }}</span>
+              }
+            </p>
+
+            <ul class="mt-4 space-y-2.5 leading-relaxed text-muted">
+              @for (highlight of role.highlights; track $index) {
+                <li
+                  class="relative ps-5 before:absolute before:start-0 before:top-[0.8em] before:h-px before:w-2.5 before:bg-accent"
+                >
+                  {{ i18n.t(highlight) }}
+                </li>
+              }
+            </ul>
+          </div>
+        </div>
+      </li>
+    }
+  </ol>
+</section>

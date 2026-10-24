@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <!-- Title, description, canonical, Open Graph, Twitter and JSON-LD are set per language by SeoService at prerender time. -->
+  <title>Ahmed Hossam — Senior Front-End Engineer (Angular)</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#fafaf7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0b0d10" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <!-- Apply the saved or system theme before first paint to avoid a flash. Keep in sync with ThemeService. -->
+  <script>
+    (function () {
+      var stored = null;
+      try { stored = localStorage.getItem('theme'); } catch (e) {}
+      var dark = stored ? stored === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (dark) document.documentElement.classList.add('dark');
+    })();
+  </script>
+</head>
+<body>
+  <app-root></app-root>
+</body>
+</html>

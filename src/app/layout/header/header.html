@@ -1,0 +1,84 @@
+<header class="sticky top-0 z-40 border-b border-line bg-bg/85 backdrop-blur-md">
+  <div class="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
+    <a
+      [href]="i18n.anchor('top')"
+      class="flex items-center gap-3 rounded-md font-semibold tracking-tight"
+    >
+      <span
+        class="grid size-9 place-items-center rounded-lg bg-ink font-mono text-sm font-medium text-bg"
+        aria-hidden="true"
+        >{{ profile.initials }}</span
+      >
+      <span class="sr-only sm:not-sr-only">{{ i18n.t(profile.name) }}</span>
+    </a>
+
+    <nav [attr.aria-label]="i18n.t(ui.primaryNav)" class="hidden md:block">
+      <ul class="flex items-center gap-1">
+        @for (id of sections; track id) {
+          <li>
+            <a
+              [href]="i18n.anchor(id)"
+              class="rounded-md px-3 py-2 text-sm text-muted transition-colors hover:text-ink"
+              >{{ i18n.t(ui.nav[id]) }}</a
+            >
+          </li>
+        }
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-1">
+      <a
+        [href]="otherLangPath()"
+        [attr.hreflang]="i18n.otherLang()"
+        [attr.lang]="i18n.otherLang()"
+        class="inline-flex h-10 items-center gap-2 rounded-md px-3 text-sm font-medium text-muted transition-colors hover:bg-surface hover:text-ink"
+      >
+        <app-icon name="globe" class="size-4" />
+        {{ i18n.t(ui.switchLanguage) }}
+      </a>
+
+      <button
+        type="button"
+        class="grid size-10 place-items-center rounded-md text-muted transition-colors hover:bg-surface hover:text-ink"
+        [attr.aria-label]="i18n.t(ui.toggleTheme)"
+        [attr.aria-pressed]="theme.theme() === 'dark'"
+        (click)="theme.toggle()"
+      >
+        <!-- Both icons are rendered so server and client markup match; CSS picks one. -->
+        <span class="dark:hidden"><app-icon name="moon" class="size-5" /></span>
+        <span class="hidden dark:inline"><app-icon name="sun" class="size-5" /></span>
+      </button>
+
+      <button
+        type="button"
+        class="grid size-10 place-items-center rounded-md text-muted transition-colors hover:bg-surface hover:text-ink md:hidden"
+        aria-controls="mobile-nav"
+        [attr.aria-expanded]="menuOpen()"
+        [attr.aria-label]="i18n.t(menuOpen() ? ui.closeMenu : ui.openMenu)"
+        (click)="menuOpen.set(!menuOpen())"
+      >
+        <app-icon [name]="menuOpen() ? 'close' : 'menu'" class="size-5" />
+      </button>
+    </div>
+  </div>
+
+  <nav
+    id="mobile-nav"
+    [attr.aria-label]="i18n.t(ui.primaryNav)"
+    class="border-t border-line md:hidden"
+    [hidden]="!menuOpen()"
+  >
+    <ul class="mx-auto flex max-w-6xl flex-col px-4 py-3 sm:px-6">
+      @for (id of sections; track id) {
+        <li>
+          <a
+            [href]="i18n.anchor(id)"
+            class="block rounded-md px-3 py-3 text-base text-ink hover:bg-surface"
+            (click)="menuOpen.set(false)"
+            >{{ i18n.t(ui.nav[id]) }}</a
+          >
+        </li>
+      }
+    </ul>
+  </nav>
+</header>

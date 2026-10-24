@@ -1,0 +1,15 @@
+<section id="about" aria-labelledby="about-title" class="mx-auto max-w-6xl px-4 py-14 sm:px-6 md:py-18">
+  <app-section-heading [index]="1" headingId="about-title" [text]="i18n.t(ui.nav.about)" />
+
+  <!-- No .reveal here: this section often starts inside the first viewport. -->
+  <div class="grid gap-8 md:grid-cols-2 md:gap-14">
+    @if (lead) {
+      <p class="text-2xl leading-snug font-medium text-pretty md:text-3xl">{{ i18n.t(lead) }}</p>
+    }
+    <div class="space-y-5 text-lg leading-relaxed text-muted">
+      @for (paragraph of rest; track $index) {
+        <p>{{ i18n.t(paragraph) }}</p>
+      }
+    </div>
+  </div>
+</section>

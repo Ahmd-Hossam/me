@@ -1,0 +1,10 @@
+<a [href]="href()" target="_blank" rel="noopener noreferrer" [class]="linkClass()">
+  <ng-content />
+  @if (srContext()) {
+    <span class="sr-only">: {{ srContext() }}</span>
+  }
+  <span class="sr-only"> {{ i18n.t(ui.opensInNewTab) }}</span>
+  @if (showIcon()) {
+    <app-icon name="external" class="size-[0.9em] rtl:-scale-x-100" />
+  }
+</a>

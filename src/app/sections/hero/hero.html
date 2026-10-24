@@ -1,0 +1,121 @@
+<section id="top" aria-labelledby="hero-title" class="relative isolate overflow-hidden">
+  <!-- Decorative backdrop: dotted grid fading out, plus a soft accent glow. -->
+  <div
+    aria-hidden="true"
+    class="absolute inset-0 -z-10 [background-image:radial-gradient(var(--line)_1px,transparent_1px)] [background-size:22px_22px] [mask-image:radial-gradient(ellipse_80%_70%_at_50%_0%,black,transparent)]"
+  ></div>
+  <div
+    aria-hidden="true"
+    class="absolute -end-48 -top-48 -z-10 size-[42rem] rounded-full bg-[radial-gradient(closest-side,color-mix(in_oklab,var(--accent)_16%,transparent),transparent)]"
+  ></div>
+
+  <div
+    class="mx-auto grid max-w-6xl gap-x-16 px-4 pt-10 pb-6 sm:px-6 sm:pt-16 sm:pb-8 md:pt-20 md:pb-10 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center"
+  >
+    <div>
+      <div class="hero-in flex items-center gap-4">
+        <!-- Small portrait/monogram on phones and tablets; the large one takes over from lg. -->
+        <div class="lg:hidden">
+          @if (profile.photo; as photo) {
+            <img
+              [ngSrc]="photo.src"
+              [width]="photo.width"
+              [height]="photo.height"
+              [alt]="i18n.t(photo.alt)"
+              priority
+              class="size-16 rounded-2xl object-cover ring-1 ring-line sm:size-20"
+            />
+          } @else {
+            <span
+              aria-hidden="true"
+              class="grid size-16 place-items-center rounded-2xl bg-ink font-mono text-xl font-medium text-bg sm:size-20 sm:text-2xl"
+              ><span dir="ltr">{{ profile.initials }}<span class="text-accent">.</span></span></span
+            >
+          }
+        </div>
+        <p class="flex items-center gap-1.5 font-mono text-sm text-muted">
+          <app-icon name="pin" class="size-4" />
+          {{ i18n.t(profile.location) }}
+        </p>
+      </div>
+
+      <!-- Text is not animated: the name or value line is the LCP element. -->
+      <h1
+        id="hero-title"
+        class="mt-8 text-[clamp(2.75rem,9vw,6rem)] leading-[0.95] font-semibold tracking-tight text-balance"
+      >
+        {{ i18n.t(profile.name) }}
+      </h1>
+
+      <p class="mt-5 text-xl font-semibold text-accent sm:text-2xl">
+        {{ i18n.t(profile.title) }}
+      </p>
+
+      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-pretty text-muted sm:text-xl">
+        {{ i18n.t(profile.valueProposition) }}
+      </p>
+
+      <div class="hero-in mt-10 flex flex-wrap gap-3 [animation-delay:60ms]">
+        <a
+          [href]="cvHref"
+          download
+          class="inline-flex h-12 items-center gap-2 rounded-lg bg-accent px-6 font-semibold text-accent-ink shadow-sm transition hover:-translate-y-0.5 hover:shadow-md motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+        >
+          <app-icon name="download" class="size-5" />
+          {{ i18n.t(ui.downloadCv) }}
+        </a>
+        <a
+          [href]="i18n.anchor('contact')"
+          class="inline-flex h-12 items-center gap-2 rounded-lg border border-line bg-surface px-6 font-semibold text-ink transition-colors hover:border-ink"
+        >
+          {{ i18n.t(ui.contactMe) }}
+          <app-icon name="arrow-right" class="size-5 rtl:-scale-x-100" />
+        </a>
+      </div>
+    </div>
+
+    <!-- Large portrait (or monogram) balancing the hero on desktop. -->
+    <div class="hero-in relative hidden lg:block [animation-delay:60ms]">
+      <div
+        aria-hidden="true"
+        class="absolute inset-0 translate-x-5 translate-y-5 rounded-[2rem] border border-accent/50 rtl:-translate-x-5"
+      ></div>
+      @if (profile.photo; as photo) {
+        <img
+          [ngSrc]="photo.src"
+          [width]="photo.width"
+          [height]="photo.height"
+          [alt]="i18n.t(photo.alt)"
+          priority
+          class="relative size-80 rounded-[2rem] object-cover shadow-xl xl:size-88"
+        />
+      } @else {
+        <div
+          aria-hidden="true"
+          class="relative grid size-80 place-items-center overflow-hidden rounded-[2rem] bg-ink text-bg shadow-xl xl:size-88"
+        >
+          <div
+            class="absolute inset-0 opacity-15 [background-image:radial-gradient(var(--bg)_1px,transparent_1px)] [background-size:18px_18px]"
+          ></div>
+          <div
+            class="absolute -end-20 -top-20 size-64 rounded-full bg-[radial-gradient(closest-side,color-mix(in_oklab,var(--accent)_45%,transparent),transparent)]"
+          ></div>
+          <span dir="ltr" class="relative text-9xl font-semibold tracking-tighter xl:text-[9rem]"
+            >{{ profile.initials }}<span class="text-accent">.</span></span
+          >
+        </div>
+      }
+    </div>
+
+    <ul
+      class="hero-in mt-10 flex flex-wrap gap-x-6 gap-y-3 border-t border-line pt-6 font-mono text-sm text-muted lg:col-span-2 lg:mt-14 [animation-delay:120ms]"
+    >
+      @for (fact of profile.facts; track $index) {
+        <li class="flex items-center gap-2">
+          <span class="size-1.5 rounded-full bg-accent" aria-hidden="true"></span>
+          {{ i18n.t(fact) }}
+        </li>
+      }
+    </ul>
+  </div>
+</section>

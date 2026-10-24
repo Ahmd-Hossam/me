@@ -1,0 +1,45 @@
+<section
+  id="contact"
+  aria-labelledby="contact-title"
+  class="mx-auto max-w-6xl px-4 pt-14 pb-16 sm:px-6 md:pt-18 md:pb-22"
+>
+  <app-section-heading [index]="7" headingId="contact-title" [text]="i18n.t(ui.nav.contact)" />
+
+  <div class="reveal grid gap-12 md:grid-cols-[3fr_2fr] md:items-end">
+    <div>
+      <p class="max-w-xl text-2xl leading-snug font-semibold tracking-tight text-pretty sm:text-3xl">
+        {{ i18n.t(ui.contactLead) }}
+      </p>
+      <a
+        [href]="'mailto:' + email"
+        dir="ltr"
+        class="mt-8 inline-flex items-center gap-3 rounded-md text-xl font-semibold break-all text-accent underline decoration-accent/30 decoration-2 underline-offset-8 transition-colors hover:decoration-accent sm:text-3xl"
+      >
+        <app-icon name="mail" class="size-6 sm:size-8" />
+        <span><span class="sr-only">{{ i18n.t(ui.emailLabel) }}: </span>{{ email }}</span>
+      </a>
+    </div>
+
+    <ul class="flex flex-col gap-3">
+      @for (social of socials; track social.href) {
+        <li>
+          <app-external-link
+            class="block"
+            [href]="social.href"
+            [showIcon]="false"
+            linkClass="group flex items-center justify-between gap-4 rounded-xl border border-line bg-surface px-5 py-4 font-semibold transition-colors hover:border-accent"
+          >
+            <span class="flex items-center gap-3">
+              <app-icon [name]="social.icon" class="size-5" />
+              {{ social.label }}
+            </span>
+            <app-icon
+              name="external"
+              class="size-4 text-muted transition-transform group-hover:-translate-y-0.5 group-hover:text-accent rtl:-scale-x-100 motion-reduce:transition-none"
+            />
+          </app-external-link>
+        </li>
+      }
+    </ul>
+  </div>
+</section>

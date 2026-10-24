@@ -1,0 +1,48 @@
+<app-hero />
+
+<!--
+  Everything below the hero is deferred. `hydrate on viewport` keeps the full content in the
+  prerendered HTML (SEO, no layout shift) while the JS for each section loads only when it is
+  scrolled into view. Placeholders keep the section id so in-page anchors always resolve.
+-->
+@defer (on viewport; hydrate on viewport) {
+  <app-about />
+} @placeholder {
+  <div id="about" class="min-h-[50vh]"></div>
+}
+
+@defer (on viewport; hydrate on viewport) {
+  <app-experience />
+} @placeholder {
+  <div id="experience" class="min-h-screen"></div>
+}
+
+@defer (on viewport; hydrate on viewport) {
+  <app-projects />
+} @placeholder {
+  <div id="projects" class="min-h-screen"></div>
+}
+
+@defer (on viewport; hydrate on viewport) {
+  <app-skills />
+} @placeholder {
+  <div id="skills" class="min-h-[60vh]"></div>
+}
+
+@defer (on viewport; hydrate on viewport) {
+  <app-education />
+} @placeholder {
+  <div id="education" class="min-h-[40vh]"></div>
+}
+
+@defer (on viewport; hydrate on viewport) {
+  <app-beyond-code />
+} @placeholder {
+  <div id="beyond" class="min-h-[30vh]"></div>
+}
+
+@defer (on viewport; hydrate on viewport) {
+  <app-contact />
+} @placeholder {
+  <div id="contact" class="min-h-[40vh]"></div>
+}

@@ -1,0 +1,40 @@
+# Static, fully prerendered Angular site. No server functions are needed.
+[build]
+  command = "npm run build"
+  publish = "dist/hossam-portfolio/browser"
+
+[build.environment]
+  # scripts/generate-seo-files.ts uses Node's built-in TypeScript support (>= 22.18).
+  NODE_VERSION = "22"
+  # Match "packageManager" in package.json (npm 10.9 can crash resolving a fresh tree).
+  NPM_VERSION = "11.9.0"
+
+# Unknown paths: serve the client-rendered shell with a 404 status (it renders the home page).
+[[redirects]]
+  from = "/*"
+  to = "/index.csr.html"
+  status = 404
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+
+# Hashed build output and fonts never change for a given URL.
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

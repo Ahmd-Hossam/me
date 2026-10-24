@@ -1,0 +1,24 @@
+<footer class="border-t border-line">
+  <div
+    class="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-10 text-sm text-muted sm:flex-row sm:items-center sm:justify-between sm:px-6"
+  >
+    <p>© {{ year }} {{ i18n.t(profile.name) }}. {{ i18n.t(ui.footerNote) }}</p>
+    <div class="flex flex-wrap items-center gap-x-6 gap-y-3">
+      <app-external-link
+        [href]="profile.contact.source"
+        [showIcon]="false"
+        linkClass="inline-flex items-center gap-2 rounded-md font-medium text-ink hover:text-accent"
+      >
+        <app-icon name="github" class="size-4" />
+        {{ i18n.t(ui.viewSource) }}
+      </app-external-link>
+      <a
+        [href]="i18n.anchor('top')"
+        class="inline-flex items-center gap-2 rounded-md font-medium text-ink hover:text-accent"
+      >
+        <app-icon name="arrow-up" class="size-4" />
+        {{ i18n.t(ui.backToTop) }}
+      </a>
+    </div>
+  </div>
+</footer>

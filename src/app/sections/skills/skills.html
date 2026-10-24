@@ -1,0 +1,19 @@
+<section id="skills" aria-labelledby="skills-title" class="mx-auto max-w-6xl px-4 py-14 sm:px-6 md:py-18">
+  <app-section-heading [index]="4" headingId="skills-title" [text]="i18n.t(ui.nav.skills)" />
+
+  <div class="grid gap-x-12 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+    @for (group of groups; track group.title.en) {
+      <div class="reveal">
+        <h3 class="font-mono text-sm font-medium text-accent">{{ i18n.t(group.title) }}</h3>
+        <ul class="mt-4 flex flex-wrap gap-2">
+          @for (skill of group.skills; track skill) {
+            <!-- Skill names stay English and left-to-right, even on the Arabic page. -->
+            <li dir="ltr" class="rounded-full border border-line bg-surface px-3 py-1 text-sm">
+              {{ skill }}
+            </li>
+          }
+        </ul>
+      </div>
+    }
+  </div>
+</section>

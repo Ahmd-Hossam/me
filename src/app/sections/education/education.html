@@ -1,0 +1,52 @@
+<section
+  id="education"
+  aria-labelledby="education-title"
+  class="mx-auto max-w-6xl px-4 py-14 sm:px-6 md:py-18"
+>
+  <app-section-heading [index]="5" headingId="education-title" [text]="i18n.t(ui.nav.education)" />
+
+  <div class="grid gap-12 md:grid-cols-3">
+    <div class="reveal">
+      <h3 class="font-mono text-sm font-medium text-accent">{{ i18n.t(ui.education) }}</h3>
+      <ul class="mt-5 space-y-6">
+        @for (entry of education; track $index) {
+          <li>
+            <p class="font-semibold">{{ i18n.t(entry.degree) }}</p>
+            <p class="mt-1 text-muted">
+              {{ i18n.t(entry.institution) }} · <span class="font-mono text-sm">{{ entry.year }}</span>
+            </p>
+            @if (entry.note; as note) {
+              <p class="mt-1 text-sm text-muted">{{ i18n.t(note) }}</p>
+            }
+          </li>
+        }
+      </ul>
+    </div>
+
+    <div class="reveal">
+      <h3 class="font-mono text-sm font-medium text-accent">{{ i18n.t(ui.awards) }}</h3>
+      <ul class="mt-5 space-y-6">
+        @for (award of awards; track $index) {
+          <li>
+            <p class="font-semibold">{{ i18n.t(award.title) }}</p>
+            <p class="mt-1 text-muted">
+              {{ i18n.t(award.event) }} · <span class="font-mono text-sm">{{ award.year }}</span>
+            </p>
+          </li>
+        }
+      </ul>
+    </div>
+
+    <div class="reveal">
+      <h3 class="font-mono text-sm font-medium text-accent">{{ i18n.t(ui.languages) }}</h3>
+      <ul class="mt-5 space-y-6">
+        @for (language of languages; track $index) {
+          <li>
+            <p class="font-semibold">{{ i18n.t(language.name) }}</p>
+            <p class="mt-1 text-muted">{{ i18n.t(language.level) }}</p>
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
+</section>
