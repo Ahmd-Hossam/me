@@ -4,14 +4,14 @@
   >
     <p>© {{ year }} {{ i18n.t(profile.name) }}. {{ i18n.t(ui.footerNote) }}</p>
     <div class="flex flex-wrap items-center gap-x-6 gap-y-3">
-      <app-external-link
+      <!-- <app-external-link
         [href]="profile.contact.source"
         [showIcon]="false"
         linkClass="inline-flex items-center gap-2 rounded-md font-medium text-ink hover:text-accent"
       >
         <app-icon name="github" class="size-4" />
         {{ i18n.t(ui.viewSource) }}
-      </app-external-link>
+      </app-external-link> -->
       <a
         [href]="i18n.anchor('top')"
         class="inline-flex items-center gap-2 rounded-md font-medium text-ink hover:text-accent"
